@@ -1,51 +1,46 @@
-/* Border box declaration 
-https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+/* Include padding and borders in each element's size. */
 html {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
-/* inherit border-box on all elements in the universe and before and after
- */
-*, 
-*:before, 
+
+*,
+*:before,
 *:after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
 	font-family: Arial, Geneva, sans-serif;
 }
+
 a {
 	color: #2772B0;
 }
+
 .wrapper {
 	width: 97%;
 	max-width: 1200px;
 	margin: 0 auto;
-	float: none;
 	background-color: #fff;
 }
 
+/* Images resize on smaller screens. */
 div img {
 	width: 100%;
-	max-width: 225px; 
+	max-width: 225px;
 }
 
-/* grid system -- mobile first! */
-/* flex contatiner */
-
+/* Mobile first: stack the items. */
 .row {
 	display: flex;
 	flex-flow: row wrap;
 }
 
-/* attribute selector to give some margin between columns and apply styles to flex items */
-
+/* Keep the original 4% spacing between columns. */
 [class*="col-"] {
 	margin-left: 4%;
 	flex: 0 0 92%;
 }
-
-/* Add background colors to see how much space each column is taking */
 
 .col-1 {
 	background-color: #A3CDD9;
@@ -55,31 +50,70 @@ div img {
 	background-color: #FFFCE6;
 }
 
-/* Tablet Landscape Screen Sizes */
-@media only screen and (min-width: 480px)  {
-	
-  .col-1,
-  .col-2 {
+.col-3 {
+	background-color: #CDE5CC;
+}
+
+.col-4 {
+	background-color: #E0D4ED;
+}
+
+.col-fifth {
+	background-color: #F5D6BD;
+}
+
+/* Row 5: put the middle item first on mobile and tablet. */
+.row-5 .featured {
+	order: -1;
+}
+
+/* Tablet: 480px through 767px */
+@media only screen and (min-width: 480px) {
+
+	.col-1,
+	.col-2,
+	.col-3,
+	.col-fifth {
 		flex: 0 0 44%;
 	}
-  
-  
 
+	.col-4 {
+		flex: 0 0 92%;
+	}
 
-
+	/* Full-width featured item, then two side-by-side items. */
+	.row-5 .featured {
+		flex: 0 0 92%;
+	}
 }
-/* Desktop screen Sizes */
+
+/* Desktop: 768px and wider */
 @media only screen and (min-width: 768px) {
-  
-  
- 	.col-1 {
+	.col-1 {
 		flex: 0 0 20%;
 	}
-  
-  
-  
+
 	.col-2 {
 		flex: 0 0 44%;
 	}
 
+	.col-3 {
+		flex: 0 0 68%;
+	}
+
+	.col-4 {
+		flex: 0 0 92%;
+	}
+
+	/* Restore the 1-2-1 layout and original order. */
+	.row-5 .featured {
+		flex: 0 0 44%;
+		order: 0;
+	}
+
+	/* Five items with five 4% left margins and 4% right space:
+	   (100% - 20% - 4%) / 5 = 15.2% per item */
+	.col-fifth {
+		flex: 0 0 15.2%;
+	}
 }
